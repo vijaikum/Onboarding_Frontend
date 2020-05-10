@@ -32,10 +32,10 @@ function LoginPage(props) {
             }
             else {
                 if (data.authenticated === "true") {
-                    let result = JSON.stringify({ "authVal": true, "userName": userName, "userRole": data.roles })
+                    let result = JSON.stringify({ "authVal": true, "user": {"userName": userName, "userRole": data.roles} })
                     //console.log('loginpage result', result);
                     props.isAuthenticated(result);
-                    history.replace(from);
+                    history.push(from);
                 }
                 else {
                     seterror("Invalid UserName or Password");

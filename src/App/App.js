@@ -5,14 +5,19 @@ import './App.css';
 import AppHeader from './AppHeader'
 import AppFooter from './AppFooter'
 import PrivateRoute from '../Components/PrivateRoute'
+
 import LoginPage from '../Pages/Login'
 import HomePage from '../Pages/Home'
+import CreateCustomer from "../Pages/CreateCustomer";
 
 class App extends Component {
+
   state = {
     isAuthenticated: false,
-    userName: '',
-    userRole: ''
+    user: {
+      userName: '',
+      userRole: ''
+    }
   }
 
   handleLogin = (result) => {
@@ -20,36 +25,35 @@ class App extends Component {
     this.setState(
       {
         isAuthenticated: data.authVal,
-        userName: data.userName,
-        userRole: data.userRole
-      }
-    );
-  }
-  
-  handleLogout = () => {
-    this.setState(
-      {
-        isAuthenticated: false,
-        userName: '',
-        userRole: ''
+        user: data.user
       }
     );
   }
 
+  handleLogout = () => {
+    this.setState({
+      isAuthenticated: false,
+      user: {userName: '', userRole: ''}
+    });
+  }
+
   render() {
     return (
-      <div className="App">        
-        <AppHeader isLoggedIn={this.state.isAuthenticated} userName={this.state.userName} 
-        userRole={this.state.userRole} isLoggedOut={this.handleLogout}></AppHeader>
-        <div className="App-Content">
-          <Router>
-            <PrivateRoute exact path="/" component={HomePage} isLoggedIn={this.state.isAuthenticated} />
+      <div className="App">
+        <Router>
+          <Route path="*">
+            <AppHeader isLoggedIn={this.state.isAuthenticated} user={this.state.user} isAuthenticated={this.handleLogin}
+              isLoggedOut={this.handleLogout}></AppHeader>
+          </Route>
+          <div className="App-Content">
             <Route exact path="/login">
               <LoginPage isAuthenticated={this.handleLogin} />
             </Route>
-          </Router>
-        </div>
-        <AppFooter></AppFooter>
+            <PrivateRoute exact path="/" component={HomePage} isLoggedIn={this.state.isAuthenticated} />
+            <PrivateRoute exact path="/addcustomer" component={CreateCustomer} isLoggedIn={this.state.isAuthenticated} />
+          </div>
+          <Route path="*" component={AppFooter} />
+        </Router>
       </div>
     );
   }
