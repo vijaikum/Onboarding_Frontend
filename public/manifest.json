@@ -1,14 +1,14 @@
 {
-  "short_name": "React App",
+  "short_name": "Onboarding App",
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "onboard.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "onboard.png",
       "type": "image/png",
       "sizes": "192x192"
     },
