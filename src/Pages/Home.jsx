@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table } from 'react-bootstrap'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core'
 
 class HomePage extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class HomePage extends Component {
       data: []
     };
 
-    this.displayModal = this.displayModal.bind(this);
+    //this.displayModal = this.displayModal.bind(this);
   }
 
 
@@ -30,10 +30,9 @@ class HomePage extends Component {
     this.callCustomerService();
   }
 
-  displayModal() {
-    window.location = '/addcustomer';
-
-  }
+  //displayModal() {
+  //  window.location = '/addcustomer';
+  //}
 
   render() {
 
@@ -41,48 +40,46 @@ class HomePage extends Component {
 
     const TableHeader = () => {
       return (
-        <thead>
-          <tr>
-            <th>Customer Name</th>
-            <th>Business Type</th>
-            <th>Status</th>
-            <th>Purpose</th>
-            <th>RM Team</th>
-            <th>PEP</th>
-            <th>Annual TurnOver</th>
-            <th>Estimate TurnOver</th>
-          </tr>
-        </thead>
+        <TableHead>
+          <TableRow>
+            <TableCell>Customer Name</TableCell>
+            <TableCell>Business Type</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell>Purpose</TableCell>
+            <TableCell>RM Team</TableCell>
+            <TableCell>PEP</TableCell>
+            <TableCell>Annual TurnOver</TableCell>
+            <TableCell>Estimate TurnOver</TableCell>
+          </TableRow>
+        </TableHead>
       )
     }
 
     const result = data.map(row => (
-      <tr key={row._id}>
-        <td>{row.custName}</td>
-        <td>{row.businessType}</td>
-        <td>{row.Status}</td>
-        <td>{row.Purpose}</td>
-        <td>{row.RMTeam}</td>
-        <td>{row.PEP}</td>
-        <td>{row.AnnualTurnOver}</td>
-        <td>{row.EstimateTurnOver}</td>
-      </tr>
+      <TableRow key={row._id}>
+        <TableCell>{row.custName}</TableCell>
+        <TableCell>{row.businessType}</TableCell>
+        <TableCell>{row.Status}</TableCell>
+        <TableCell>{row.Purpose}</TableCell>
+        <TableCell>{row.RMTeam}</TableCell>
+        <TableCell>{row.PEP}</TableCell>
+        <TableCell>{row.AnnualTurnOver}</TableCell>
+        <TableCell>{row.EstimateTurnOver}</TableCell>
+      </TableRow >
     ))
 
     return (
-      <div>
-        <div>
-          { //<Button onClick={this.displayModal}>New Customer</Button>
-  }
-        </div><br></br>
-        <div>
-          <Table striped bordered hover responsive>
+      <div style={{ width:"80%", marginLeft:"10%"}}>
+        <TableContainer component={Paper}>
+          <Table size="small" aria-label="a dense table">
             <TableHeader />
-            <tbody>
+            <TableBody>
               {result}
-            </tbody>
+            </TableBody>
           </Table>
-        </div></div>
+        </TableContainer>
+      </div>
+
     );
   }
 
