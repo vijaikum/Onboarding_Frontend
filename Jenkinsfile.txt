@@ -1,0 +1,11 @@
+node {
+   stage('init') {
+      checkout scm
+   }
+   stage('build') {
+      sh '''
+         npm install
+         npm run build
+      '''
+   }
+}
