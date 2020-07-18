@@ -1,0 +1,13 @@
+  
+apiVersion: v1
+kind: Service
+metadata:
+  name: ninja-react-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: ninja-react-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
