@@ -27,7 +27,8 @@ node {
     
     stage('Test Kubernetes') {
         withKubeConfig(credentialsId: 'kubeconfig', serverUrl: 'https://ninjadona-cluster-dns-946b89d4.hcp.centralus.azmk8s.io:443') {
-            sh 'kubectl config view'
+            sh 'kubectl create -f deployment.yml'
+            sh 'kubectl create -f service.yml'
         }
     }
 }
