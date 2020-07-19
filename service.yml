@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ninja-react-app-loadbalancer
+  name: ninja-react-app
 spec:
   type: LoadBalancer
   selector:
