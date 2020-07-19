@@ -1,21 +1,26 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: ninja-react-app
 spec:
-  replicas: 2
   selector:
-    matchLabels:
-      app: ninja-react-app
-  template:
-    metadata:
-      labels:
+      matchLabels:
         app: ninja-react-app
-    spec:
-      containers:
+  replicas: 1
+  template:
+      metadata:
+        labels:
+            app: ninja-react-app
+      spec:
+        containers:
         - name: ninja-react-app
           image: vijkum/onboarding:react
           imagePullPolicy: Always
-          ports:
-            - containerPort: 80
-      restartPolicy: Always
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /
