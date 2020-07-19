@@ -6,7 +6,7 @@ spec:
   selector:
       matchLabels:
         app: ninja-react-app
-  replicas: 1
+  replicas: 2
   template:
       metadata:
         labels:
