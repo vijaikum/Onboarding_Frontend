@@ -21,12 +21,12 @@ node {
     stage('Push image') {
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
             app.push("react")
-            app.push("latest")
+            app.push("react-latest")
         }
     }
     
     stage('Test Kubernetes') {
-        withKubeConfig(credentialsId: 'kubeconfig', serverUrl: 'https://ninjadona-cluster-dns-946b89d4.hcp.centralus.azmk8s.io:443') {
+        withKubeConfig(credentialsId: 'kubeconfig', serverUrl: 'https://murugan-cl-murugan-kube-4ebfba-8817583e.hcp.centralus.azmk8s.io:443') {
             sh 'kubectl create -f deployment.yml'
             sh 'kubectl create -f service.yml'
         }
