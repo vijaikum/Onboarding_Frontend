@@ -31,13 +31,5 @@ node {
             sh 'echo "Tests passed"'
         }
     }
-
-    stage('Push image to DockerHub') {
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            app.push("react")
-            app.push("react-latest")
-        }
-    }
-    
    
 }
