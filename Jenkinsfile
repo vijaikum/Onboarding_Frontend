@@ -31,5 +31,19 @@ node {
             sh 'echo "Tests passed"'
         }
     }
+    
+    stage('Push image to DockerHub') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("react")
+            app.push("react-latest")
+        }
+    }
+
+ stage('Deploy Kubernetes') {
+        withKubeConfig(credentialsId: 'kubeconfig', serverUrl: 'https://murugan-cl-murugan-kube-4ebfba-8817583e.hcp.centralus.azmk8s.io:443') {
+            sh 'kubectl create -f deployment.yml'
+            sh 'kubectl create -f service.yml'
+        }
+    }
    
 }
