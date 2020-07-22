@@ -16,6 +16,9 @@ spec:
         - name: ninja-react-app
           image: vijkum/onboarding:react
           imagePullPolicy: Always
+          env:
+            - name: REACT_APP_API_BASE_URL
+              value: "http://IPtoreplace:5000"
           ports:
             - containerPort: 80
       restartPolicy: Always
